@@ -1,10 +1,25 @@
-import { SignOutButton } from '@clerk/nextjs'
-import React from 'react'
+import { AppSidebar } from "@/components/app-sidebar"
+import { NavActions } from "@/components/nav-actions"
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbList,
+  BreadcrumbPage,
+} from "@/components/ui/breadcrumb"
+import { Separator } from "@/components/ui/separator"
+import {
+  SidebarInset,
+  SidebarProvider,
+  SidebarTrigger,
+} from "@/components/ui/sidebar"
 
-const page = () => {
+export default function Page() {
   return (
-    <div><SignOutButton /></div>
+    <SidebarProvider>
+      <AppSidebar />
+      <SidebarInset>
+        
+      </SidebarInset>
+    </SidebarProvider>
   )
 }
-
-export default page

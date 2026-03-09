@@ -10,12 +10,13 @@ import { currentUser } from "@clerk/nextjs/server";
 import StarOnGithub from "@/components/mvpblocks/star-on-github";
 import AboutUs1 from "@/components/mvpblocks/about-us-1";
 import { ThemeProvider } from "@/components/theme-provider";
+import MeshyCards from "@/components/mvpblocks/meshy-cards";
 
 export default async function Home() {
   const user = await currentUser();
   console.log(user);
   return (
-      <div className="bg-linear-to-b from-[#FFE88E] via-[#FFE373] to-[#FFE88D] h-screen text-black">
+      <div className="bg-linear-to-b from-[#FFE88E] via-[#FFE373] to-[#FFE88D] text-black overflow-hidden">
         <nav className="flex flex-row items-center font-nanum justify-between px-5 py-6 border-b-2 border-black">
           <div className="flex flex-row items-center gap-2.5">
             <Image src='Logo.svg' alt="stamp logo" width={50} height={50} />
@@ -47,6 +48,13 @@ export default async function Home() {
           
         </section>
         {/* About us */}
+        <div className="flex flex-col gap-4 items-center justify-center">
+          <h1 className="text-5xl font-bold">Our Features</h1>
+          <div className="">
+            <MeshyCards />
+          </div>
+        </div>
+        
         
       </div>
 

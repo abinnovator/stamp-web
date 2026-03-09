@@ -8,16 +8,17 @@ import './custom-ui.css'
 import { ThemeToggleButton4 } from '@/components/ui/skiper4';
 import { ModeToggle } from '@/components/ModeToggle';
 import { useTheme } from 'next-themes';
+import { Button } from '@/components/ui/button';
+import { useChatSidebar } from '@/lib/zustand/store';
 
 const page = () => {
 
   return (
     <div style={{ position: 'fixed', inset: 0 }}>
 		<Tldraw hideUi inferDarkMode>
-            <div className="absolute right-[720px] bottom-10">
+            <div className="absolute bottom-8 left-1/2 -translate-x-1/2">
                 <CustomUi />
             </div>
-			
 		</Tldraw>
 	</div>
   ) 
@@ -25,42 +26,7 @@ const page = () => {
 const CustomUi = track(() => {
 	const editor = useEditor()
 	const { setTheme, theme } = useTheme()
-
-	useEffect(() => {
-		const handleKeyUp = (e: KeyboardEvent) => {
-			switch (e.key) {
-				case 'Delete':
-				case 'Backspace': {
-					editor.deleteShapes(editor.getSelectedShapeIds())
-					break
-				}
-				case 'v': {
-					editor.setCurrentTool('select')
-					break
-				}
-				case 'e': {
-					editor.setCurrentTool('eraser')
-					break
-				}
-				case 'x':{
-					editor.setCurrentTool('text')
-					break
-				}
-				case 'p':
-				case 'b':
-				case 'd': {
-					editor.setCurrentTool('draw')
-					break
-				}
-			}
-		}
-
-		window.addEventListener('keyup', handleKeyUp)
-		return () => {
-			window.removeEventListener('keyup', handleKeyUp)
-		}
-	})
-
+    const { openChat, closeChat, open } = useChatSidebar()
 	return (
 		<div className="">
 			
@@ -101,7 +67,9 @@ const CustomUi = track(() => {
                     name="Ai"
                     className=''
 					src="/star-solid-full.svg"
-s                 />
+                    onClick={() => openChat()}
+                    
+                 />
             </Dock>
 		</div>
 	)
