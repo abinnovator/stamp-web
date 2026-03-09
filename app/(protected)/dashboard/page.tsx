@@ -1,4 +1,5 @@
 import { AppSidebar } from "@/components/app-sidebar"
+import Btn09 from "@/components/mvpblocks/btn-gradient1"
 import { NavActions } from "@/components/nav-actions"
 import {
   Breadcrumb,
@@ -15,11 +16,11 @@ import {
 
 export default function Page() {
   return (
-    <SidebarProvider>
-      <AppSidebar />
-      <SidebarInset>
-        
-      </SidebarInset>
-    </SidebarProvider>
+    <div className="px-8 py-8">
+      <div className="flex flex-row justify-between items-center"><h1 className="text-3xl">Your Stamps</h1>
+      <Btn09 text="Create Stamp" link="/dashboard/stamp" /></div>
+      
+
+    </div>
   )
 }
