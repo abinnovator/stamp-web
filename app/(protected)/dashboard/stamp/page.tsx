@@ -1,9 +1,10 @@
 "use client"
-import React, { useEffect } from 'react'
-import { Tldraw, track, useEditor } from 'tldraw'
+import React, { useCallback, useEffect, useState } from 'react'
+import { getSnapshot, loadSnapshot, Tldraw, track, useEditor } from 'tldraw'
 import { Dock, DockIcon } from "@/components/ui/dock";
 
 import 'tldraw/tldraw.css'
+import { toast } from "sonner"
 import './custom-ui.css'
 import { ThemeToggleButton4 } from '@/components/ui/skiper4';
 import { ModeToggle } from '@/components/ModeToggle';
@@ -27,6 +28,34 @@ const CustomUi = track(() => {
 	const editor = useEditor()
 	const { setTheme, theme } = useTheme()
     const { openChat, closeChat, open } = useChatSidebar()
+    const save = useCallback(() => {
+		// [2]
+		const { document, session } = getSnapshot(editor.store)
+		// [3]
+		localStorage.setItem('snapshot', JSON.stringify({ document, session }))
+        console.log("saved", document)
+        toast.success("The document has been saved successfully.")
+	}, [editor])
+
+	const load = useCallback(() => {
+		const snapshot = localStorage.getItem('snapshot')
+		if (!snapshot) return
+
+		// [4]
+		loadSnapshot(editor.store, JSON.parse(snapshot))
+        toast.success("The document has been loaded successfully.")
+	}, [editor])
+
+	const [showCheckMark, setShowCheckMark] = useState(false)
+	useEffect(() => {
+		if (showCheckMark) {
+			const timeout = setTimeout(() => {
+				setShowCheckMark(false)
+			}, 1000)
+			return () => clearTimeout(timeout)
+		}
+		return
+	})
 	return (
 		<div className="">
 			
@@ -70,6 +99,22 @@ const CustomUi = track(() => {
                     onClick={() => openChat()}
                     
                  />
+                 <DockIcon
+                    name="Save"
+                    className=''
+					src="/floppy-disk-regular-full.svg"
+                    onClick={() => {
+					save()
+					setShowCheckMark(true)
+				}}/>
+                <DockIcon
+                    name="Load"
+                    className=''
+					src="/floppy-disk-regular-full.svg"
+                    onClick={() => {
+					load()
+					setShowCheckMark(true)
+				}}/>
             </Dock>
 		</div>
 	)
