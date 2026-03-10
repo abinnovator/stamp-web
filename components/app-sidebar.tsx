@@ -65,6 +65,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                         tooltip={{ children: item.title, hidden: false }}
                         onClick={() => {
                           if (item.title === "Search") setSearchOpen((v) => !v)
+                          
                         }}
                         isActive={item.title === "Search" && searchOpen}
                         className="px-2.5 md:px-2"
