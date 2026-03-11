@@ -81,6 +81,7 @@ export default function MeshyCards() {
             </h3>
             <p className="mb-4 font-sans text-sm text-white/80">
               Access ai models right from Stamp!
+              (Already There)
             </p>
           </div>
         </div>
@@ -123,6 +124,7 @@ export default function MeshyCards() {
             </h3>
             <p className="mb-4 font-sans text-sm text-white/80">
               Check your mail right from the app!
+              (Coming soon)
             </p>
             
           </div>
@@ -166,6 +168,7 @@ export default function MeshyCards() {
             </h3>
             <p className="mb-4 font-sans text-sm text-white/80">
               Plan your whole day out with stamp!
+              (Not there yet)
             </p>
             
           </div>
