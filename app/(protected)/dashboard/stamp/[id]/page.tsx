@@ -19,7 +19,7 @@ const page = async ({ params }: { params: { id: string } }) => {
     console.log(id)
   return (
     <div style={{ position: 'fixed', inset: 0 }}>
-        <Tldraw hideUi inferDarkMode>
+        <Tldraw hideUi inferDarkMode licenseKey={process.env.NEXT_PUBLIC_TLDRAW_LICENSE_KEY}>
             <div className="absolute bottom-8 left-1/2 -translate-x-1/2">
                 <CustomUi slug={id} />
             </div>

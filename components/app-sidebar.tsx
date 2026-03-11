@@ -21,10 +21,10 @@ const navMain = [
     title: "Search",
     icon: <Globe />,
   },
-  {
-    title: "Mail",
-    icon: <Mail />
-  }
+  // {
+  //   title: "Mail",
+  //   icon: <Mail />
+  // }
 ]
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
