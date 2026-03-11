@@ -8,13 +8,23 @@
  * @module
  */
 
+import type * as calendars from "../calendars.js";
+import type * as http from "../http.js";
+import type * as stamps from "../stamps.js";
+import type * as users from "../users.js";
+
 import type {
   ApiFromModules,
   FilterApi,
   FunctionReference,
 } from "convex/server";
 
-declare const fullApi: ApiFromModules<{}>;
+declare const fullApi: ApiFromModules<{
+  calendars: typeof calendars;
+  http: typeof http;
+  stamps: typeof stamps;
+  users: typeof users;
+}>;
 
 /**
  * A utility for referencing Convex functions in your app's public API.

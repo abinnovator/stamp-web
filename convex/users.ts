@@ -1,5 +1,28 @@
-import { internalMutation } from "./_generated/server";
+import { internalMutation, mutation } from "./_generated/server";
 import { v } from "convex/values";
+
+// Called client-side after login to ensure user exists in DB
+export const store = mutation({
+  args: {},
+  handler: async (ctx) => {
+    const identity = await ctx.auth.getUserIdentity();
+    if (!identity) throw new Error("Not authenticated");
+
+    const existing = await ctx.db
+      .query("users")
+      .withIndex("by_token", (q) => q.eq("tokenIdentifier", identity.tokenIdentifier))
+      .unique();
+
+    if (existing) return existing._id;
+
+    return await ctx.db.insert("users", {
+      tokenIdentifier: identity.tokenIdentifier,
+      name: identity.name ?? identity.email ?? "Unknown",
+      email: identity.email ?? "",
+      imageUrl: identity.pictureUrl,
+    });
+  },
+});
 
 export const createOrUpdateUser = internalMutation({
   args: {

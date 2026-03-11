@@ -56,8 +56,9 @@ http.route({
 
       const name = [data.first_name, data.last_name].filter(Boolean).join(" ") || "Unknown";
 
+      const domain = process.env.CLERK_FRONTEND_API_URL;
       await ctx.runMutation(internal.users.createOrUpdateUser, {
-        tokenIdentifier: data.id,
+        tokenIdentifier: `${domain}|${data.id}`,
         name,
         email: primaryEmail,
         imageUrl: data.image_url,

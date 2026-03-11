@@ -2,14 +2,7 @@ import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Link from "next/link";
 import { GlowingButton } from "@/components/ui/glowing-button"
-
-
-import { StarButton } from "@/components/ui/star-button"
-import { useUser } from "@clerk/nextjs";
 import { currentUser } from "@clerk/nextjs/server";
-import StarOnGithub from "@/components/mvpblocks/star-on-github";
-import AboutUs1 from "@/components/mvpblocks/about-us-1";
-import { ThemeProvider } from "@/components/theme-provider";
 import MeshyCards from "@/components/mvpblocks/meshy-cards";
 
 export default async function Home() {
@@ -23,16 +16,16 @@ export default async function Home() {
             <h1 className="text-black text-2xl font-nanum">Stamp</h1>
           </div>
           <div className="hidden md:flex flex-row items-center gap-10">
-            <Link href='/about'>About</Link>
-            <Link href='/features'>Features</Link>
+            <Link href='#about'>About</Link>
+            <Link href='#demo'>Demo</Link>
           </div>
           <div className="flex flex-row gap-2">
-            {/* <Link href={user ? '/dashboard':'/sign-up'}>
+            <Link href={user ? '/dashboard':'/sign-up'}>
               <GlowingButton className="bg-[#001AFF] p-5 cursor-pointer text-white hover:text-white border-none" glowColor="#22d3ee">{user ? 'Dashboard' : 'Start Now'}</GlowingButton>
-            </Link> */}
-            <Link href='/waitlist'>
-              <GlowingButton className="bg-[#001AFF] p-5 cursor-pointer text-white hover:text-white border-none" glowColor="#22d3ee">Waitlist</GlowingButton>
             </Link>
+            {/* <Link href='/waitlist'>
+              <GlowingButton className="bg-[#001AFF] p-5 cursor-pointer text-white hover:text-white border-none" glowColor="#22d3ee">Waitlist</GlowingButton>
+            </Link> */}
             {/* <StarOnGithub /> */}
           </div>
           
@@ -51,7 +44,7 @@ export default async function Home() {
           
         </section>
         {/* About us */}
-        <div className="flex flex-col gap-4 items-center justify-center px-4">
+        <div className="flex flex-col gap-4 items-center justify-center px-4" id="about">
           <h1 className="text-3xl md:text-5xl font-bold">Our Features</h1>
           <div className="">
             <MeshyCards />
