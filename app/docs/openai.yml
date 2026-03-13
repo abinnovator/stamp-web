@@ -1,0 +1,44 @@
+openapi: 3.0.0
+info:
+  title: Stamp API
+  description: Spatial research and note-taking workspace powered by Convex.
+  version: 1.0.0
+
+paths:
+  /mutations/updateStamp:
+    post:
+      summary: Update a Stamp
+      description: Updates the content and title of a specific stamp/note.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: string
+                  description: The unique Convex ID of the stamp.
+                title:
+                  type: string
+                  description: The new title for the note.
+                content:
+                  type: object
+                  description: The TipTap/Tldraw JSON snapshot.
+      responses:
+        '200':
+          description: Stamp updated successfully.
+
+  /queries/getById:
+    get:
+      summary: Fetch a Stamp
+      description: Retrieves the full data for a single stamp by its ID.
+      parameters:
+        - name: id
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A stamp object containing title and content.
